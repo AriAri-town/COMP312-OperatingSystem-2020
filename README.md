@@ -16,3 +16,13 @@
 > 5. random number를 생성하기 위한 seed는 시간을 이용한다 (즉, random() 함수의 매번 수행 시 다른 seed를 사용한다).  
 > 6. 모든 결과는 result.dat 파일로 출력한다.  
 > 7. 위과정을3번이상수행하고그결과를비교한다.  
+
+
+
+### 2. 병렬 파일 저장
+2 processes를 생성해서 한 process는 file server 역할을 하고, 다른 한 프로세 서는 client 역할을 한다. server는 client가 요청한 일을 수행하고, client는 사용 자의 명령을 받아서 server에게 전달한다.
+> 1. Client는 disk에 저장된 특정 파일(20M 정도의 파일)을 file server에게 n개 의 새로운 파일에 나누어 저장하도록 요청을 한다.
+> 2. 저장 요청은 사용자가 client에게 직접 요청하도록 한다.
+> 3. 예) store temp.dat paratemp.dat –5 (temp.dat 파일을 5개의 새로운 파 일에 저장하고 병렬로 저장된 파일의 이름을 paratemp.dat로 기억한다.)
+> 4. File server는 파일의 크기를 확인해서 n개의 블록으로 나누고, 각 블록을 disk에 새로운 파일명으로 저장한다. 이때, n개의 블록은 n개의 thread에 의 해 각각 병렬로 저장된다.
+> 5. File server는 자신이 저장한 파일에 대한 정보를 지속적을 보관해서 향후 읽 기 요청 시에 적절한 대응을 하도록 해 준다. 프로그램을 새로 수행시키더라 도 이미 저장된 파일을 읽을 수 있도록 해야 한다.
